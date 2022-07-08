@@ -1,4 +1,5 @@
-import { IModel, IService, TToken, ILogin } from '../interfaces';
+import { compareSync } from 'bcryptjs';
+import { IModel, IService, ILogin } from '../interfaces';
 import generateJwt from '../utils/generateJwt';
 
 export default class UserService implements IService {
@@ -6,13 +7,19 @@ export default class UserService implements IService {
     this.model = model;
   }
 
-  async login(data: ILogin): Promise<TToken> {
-    const user = await this.model.login(data);
+  async login(data: ILogin): Promise<string | boolean> {
+    const { email, password: reqPass } = data;
 
-    const { email, password } = user;
+    const { password: userPass } = await this.model.login(email);
 
-    const token: TToken = generateJwt({ email, password });
+    const valid = compareSync(reqPass, userPass);
 
-    return token;
+    if (valid) {
+      const token = generateJwt({ email, password: reqPass });
+
+      return token;
+    }
+
+    return false;
   }
 }

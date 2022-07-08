@@ -11,13 +11,11 @@ export interface ILogin {
 }
 
 export interface IService {
-  login(data: ILogin): Promise<TToken>;
+  login(data: ILogin): Promise<string | boolean>;
 }
 
 export interface IModel {
   login(
-    data: ILogin
+    email: string
   ): Promise<IUser>;
 }
-
-export type TToken = string;
