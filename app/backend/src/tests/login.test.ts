@@ -77,6 +77,24 @@ describe('When calling the /login route with the POST method', () => {
       expect(response.body).to.be.eql({ message: 'All fields must be filled' });
     });
 
+        it('It should return the status 400 when one of them is empty', async () => {
+      const response = await chai.request(app).post('/login').send({
+        email: '',
+        password: '',
+      });
+    
+      expect(response.status).to.be.equal(400);
+    });
+
+    it('It should return the correct message when one of them is empty', async () => {
+      const response = await chai.request(app).post('/login').send({
+        email: '',
+        password: '',
+      });
+    
+      expect(response.body).to.be.eql({ message: 'All fields must be filled' });
+    });
+
     it('It should return the status 401 when the email has an incorrect format', async () => {
       const response = await chai.request(app).post('/login').send({
         email: 'incorrect email format',

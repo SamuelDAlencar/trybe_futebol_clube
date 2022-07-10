@@ -3,38 +3,48 @@ import { NextFunction, Request, Response } from 'express';
 import Joi = require('joi');
 import Model from '../repository/user.repository';
 
+const MISSING_FIELDS = 'All fields must be filled';
+const INCORRECT_FIELDS = 'Incorrect email or password';
+
 const UserModel = new Model();
 
-const validateLogin = (req: Request, res: Response, next: NextFunction) => {
-  const loginJoi = Joi.object({
-    email: Joi.string().email().required().messages({
-      'any.required': 'All fields must be filled',
-      'string.email': 'Incorrect email or password',
-    }),
-    password: Joi.string().required().messages({
-      'any.required': 'All fields must be filled',
-    }),
-  });
+// Jois  --------------------------------------
+const loginJoi = Joi.object({
+  email: Joi.string().email().required().messages({
+    'any.required': MISSING_FIELDS,
+    'string.email': INCORRECT_FIELDS,
+    'string.empty': MISSING_FIELDS,
+  }),
+  password: Joi.string().required().messages({
+    'any.required': MISSING_FIELDS,
+    'string.empty': MISSING_FIELDS,
+  }),
+});
+// ---------------------------------------
 
+const validateLogin = async (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginJoi.validate(req.body);
 
-  return error
-    ? res.status(error.message.includes('filled') ? 400 : 401).json({ message: error.message })
-    : next();
-};
+  if (error) {
+    return res.status(error.message.includes('filled') ? 400 : 401)
+      .json({ message: error.message });
+  }
 
-const validateHash = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password: reqPass } = req.body;
 
-  const { password: userPass } = await UserModel.login(email);
+  const user = await UserModel.login(email);
 
-  const valid = await bcryptjs.compare(reqPass, userPass);
+  if (!user) {
+    return res.status(401).json({ message: INCORRECT_FIELDS });
+  }
+
+  const valid = await bcryptjs.compare(reqPass, user.password);
 
   if (!valid) {
-    return res.status(401).json({ message: 'Incorrect email or password' });
+    return res.status(401).json({ message: INCORRECT_FIELDS });
   }
 
   next();
 };
 
-export { validateLogin, validateHash };
+export { validateLogin };
