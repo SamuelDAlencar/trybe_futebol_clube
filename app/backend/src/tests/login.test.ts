@@ -1,15 +1,15 @@
 // @ts-ignore
 import chaiHttp = require('chai-http');
-import * as sinon from 'sinon';
+import { it } from 'mocha';
 import * as chai from 'chai';
+import * as sinon from 'sinon';
+const { expect } = chai;
 
 import { app } from '../app';
 import UserModel from '../database/models/users';
-import { it } from 'mocha';
 
 chai.use(chaiHttp);
 
-const { expect } = chai;
 
 describe('When calling the /login route with the POST method', () => {
   describe('If all fields are correct:',() => {

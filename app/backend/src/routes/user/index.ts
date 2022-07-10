@@ -14,8 +14,10 @@ const entityFactory = () => {
 
 const router = express.Router();
 
-router.post('/', validateLogin, (req, res) => {
-  entityFactory().login(req, res);
-});
+router.post(
+  '/',
+  validateLogin,
+  (req, res) => entityFactory().login(req, res),
+);
 
 export default router;
