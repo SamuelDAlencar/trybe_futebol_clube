@@ -24,7 +24,6 @@ Match.init(
     inProgress: DataTypes.INTEGER,
   },
   {
-    underscored: true,
     sequelize: db,
     modelName: 'matches',
     timestamps: false,

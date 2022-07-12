@@ -22,7 +22,6 @@ User.init(
     password: DataTypes.STRING,
   },
   {
-    underscored: true,
     sequelize: db,
     modelName: 'users',
     timestamps: false,
