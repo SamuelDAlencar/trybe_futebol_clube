@@ -1,7 +1,15 @@
 import { TTeam, TUser } from '../entities';
 
+export interface IRole {
+  role: 'admin' | 'user'
+}
+
+export interface TToken {
+  token: string;
+}
+
 export interface IService {
-  login(data: TUser): Promise<string | boolean>;
+  login(data: TUser): Promise<TToken>;
   validateRole(token: string): Promise<IRole>;
 }
 
@@ -15,8 +23,4 @@ export interface TeamModel {
 
 export interface ITeamService {
   getTeams(): Promise<TTeam[]>;
-}
-
-export interface IRole {
-  role: 'admin' | 'user'
 }

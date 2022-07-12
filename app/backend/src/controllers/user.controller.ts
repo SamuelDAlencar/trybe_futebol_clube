@@ -9,7 +9,7 @@ export default class UserController {
   async login(req: Request, res: Response) {
     const token = await this.service.login(req.body);
 
-    return res.status(200).json({ token });
+    return res.status(200).json(token);
   }
 
   async validateRole(req: Request, res: Response) {

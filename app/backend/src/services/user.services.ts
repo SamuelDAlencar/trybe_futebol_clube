@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 
-import { IModel, IRole, IService } from '../interfaces';
+import { IModel, IRole, IService, TToken } from '../interfaces';
 import { TUser } from '../entities';
 import generateJwt from '../utils/generateJwt';
 
@@ -11,14 +11,14 @@ export default class UserService implements IService {
     this.model = model;
   }
 
-  async login(data: TUser): Promise<string | boolean> {
+  async login(data: TUser): Promise<TToken> {
     const { email, password } = data;
 
     await this.model.findOneByEmail(email);
 
     const token = generateJwt({ email, password });
 
-    return token;
+    return { token };
   }
 
   async validateRole(token: string): Promise<IRole> {

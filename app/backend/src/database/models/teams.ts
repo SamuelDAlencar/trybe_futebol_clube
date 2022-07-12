@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import db from '.';
 
 class Team extends Model {
-  private id: number;
+  public id: number;
   public teamName: string;
 }
 
