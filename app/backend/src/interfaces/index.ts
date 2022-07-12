@@ -1,23 +1,15 @@
-import { TTeam, TUser } from '../entities';
+import { TRole, TTeam, TToken, TUser } from '../types';
 
-export interface IRole {
-  role: 'admin' | 'user'
-}
-
-export interface TToken {
-  token: string;
-}
-
-export interface IService {
+export interface IUserService {
   login(data: TUser): Promise<TToken>;
-  validateRole(token: string): Promise<IRole>;
+  validateRole(token: string): Promise<TRole>;
 }
 
-export interface IModel {
+export interface IUserModel {
   findOneByEmail(email: string): Promise<TUser>;
 }
 
-export interface TeamModel {
+export interface ITeamModel {
   findAll(): Promise<TTeam[]>;
   findOne(id: number): Promise<TTeam>;
 }

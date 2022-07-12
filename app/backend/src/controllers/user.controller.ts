@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { IService } from '../interfaces';
+import { IUserService } from '../interfaces';
 
 export default class UserController {
-  constructor(private service: IService) {
+  constructor(private service: IUserService) {
     this.service = service;
   }
 

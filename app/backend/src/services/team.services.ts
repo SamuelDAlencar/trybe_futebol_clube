@@ -1,8 +1,8 @@
-import { TTeam } from '../entities';
-import { TeamModel, ITeamService } from '../interfaces';
+import { TTeam } from '../types';
+import { ITeamModel, ITeamService } from '../interfaces';
 
 export default class TeamService implements ITeamService {
-  constructor(private model: TeamModel) {
+  constructor(private model: ITeamModel) {
     this.model = model;
   }
 

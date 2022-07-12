@@ -10,3 +10,11 @@ export type TTeam = {
   id?: number;
   teamName: string;
 };
+
+export type TToken = {
+  token: string;
+};
+
+export type TRole = {
+  role: 'admin' | 'user'
+};

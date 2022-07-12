@@ -1,8 +1,8 @@
 import Model from '../database/models/teams';
-import { TeamModel } from '../interfaces';
-import { TTeam } from '../entities';
+import { ITeamModel } from '../interfaces';
+import { TTeam } from '../types';
 
-export default class Repository implements TeamModel {
+export default class Repository implements ITeamModel {
   constructor(private model = Model) {
     this.model = model;
   }

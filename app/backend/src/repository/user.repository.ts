@@ -1,8 +1,8 @@
 import Model from '../database/models/users';
-import { IModel } from '../interfaces';
-import { TUser } from '../entities';
+import { IUserModel } from '../interfaces';
+import { TUser } from '../types';
 
-export default class Repository implements IModel {
+export default class Repository implements IUserModel {
   constructor(private model = Model) {
     this.model = model;
   }
