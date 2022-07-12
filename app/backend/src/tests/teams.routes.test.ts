@@ -74,4 +74,31 @@ describe('Team routes:', () => {
       expect(response.body[0]).to.be.equal(undefined);
     });
   });
+
+  describe('GET => /teams:id - When there is a team that corresponds with the id received:', () => {
+    before(() => {
+      sinon.stub(TeamModel, 'findOne')
+        .resolves({
+          id: 1,
+          teamName: 'Avaí/Kindermann'
+        } as Team);
+    });
+
+    after(() => {
+      (TeamModel.findOne as sinon.SinonStub).restore();
+    });
+    
+    it('It should return the status "OK"', async () => {
+      const response = await chai.request(app).get('/teams/1');
+
+      expect(response.status).to.be.equal(200);
+    });
+
+    it('It should return the respective team', async () => {
+      const response = await chai.request(app).get('/teams/1');
+
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.have.keys(['id', 'teamName']);
+    });
+  });
 });

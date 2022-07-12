@@ -19,8 +19,10 @@ export interface IModel {
 
 export interface TeamModel {
   findAll(): Promise<TTeam[]>;
+  findOne(id: number): Promise<TTeam>;
 }
 
 export interface ITeamService {
   getTeams(): Promise<TTeam[]>;
+  getTeamById(id: number): Promise<TTeam>;
 }
