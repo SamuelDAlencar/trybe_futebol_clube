@@ -22,7 +22,7 @@ export default class UserService implements IService {
   }
 
   async validateRole(token: string): Promise<IRole> {
-    const decoding = jwt.verify(token as string, secret as string) as jwt.JwtPayload;
+    const decoding = jwt.verify(token, secret as string) as jwt.JwtPayload;
 
     const { role } = await this.model.findOneByEmail(decoding.data.email) as IRole;
 

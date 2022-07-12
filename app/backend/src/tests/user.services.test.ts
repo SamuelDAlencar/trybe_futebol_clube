@@ -4,9 +4,10 @@
 // import * as sinon from 'sinon';
 // const { expect } = chai;import UserModel from '../database/models/users';
 
-// import userService from '../services/user.services';
+// import UserService from '../services/user.services';
 // import { IService } from '../interfaces/index';
 
+// const userService = new UserService();
 
 // describe('userServices - login method', () => {
 //   before(() => {

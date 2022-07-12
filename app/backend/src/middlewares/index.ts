@@ -58,8 +58,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
 
   try {
     const decoding = jwt.verify(token as string, secret as string) as jwt.JwtPayload;
-    console.log(decoding);
-    
+
     const user = await UserModel.findOneByEmail(decoding.data.email);
 
     if (!user) {
@@ -67,7 +66,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
     }
   } catch (err) {
     console.log(err);
-    
+
     return res.status(401).json({ message: 'Invalid or expired token' });
   }
 

@@ -7,6 +7,7 @@ const { expect } = chai;
 
 import { app } from '../app';
 import TeamModel from '../database/models/teams';
+import Team from '../database/models/teams';
 
 chai.use(chaiHttp);
 
@@ -16,18 +17,18 @@ describe('GET - /teams', () => {
       sinon.stub(TeamModel, 'findAll')
         .resolves([
           {
-            id: 1,
+            // id: 1,
             teamName: 'Avaí/Kindermann'
           },
           {
-            id: 2,
+            // id: 2,
             teamName: 'Bahia'
           },
           {
-            id: 3,
+            // id: 3,
             teamName: 'Botafogo'
           }
-        ] as TeamModel[]);
+        ] as Team[]);
     });
 
     after(() => {

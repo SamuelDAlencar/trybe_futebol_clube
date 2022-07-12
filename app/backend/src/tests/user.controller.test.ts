@@ -109,8 +109,8 @@ describe('GET - /login/validate', () => {
     sinon.stub(bcryptjs, 'compare')
       .resolves(true);
     sinon.stub(jwt, 'verify')
-      .resolves({ data: { email: 'email@email.com' }
-      });
+      .returns({ data: { email: 'email@email.com' }
+      } as any);
   });
 
   after(() => {
