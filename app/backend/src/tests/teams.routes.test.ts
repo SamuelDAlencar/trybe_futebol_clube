@@ -46,7 +46,9 @@ describe('Team routes:', () => {
 
       expect(response.body).to.be.an('array');
       expect(response.body[0]).to.be.an('object');
-      expect(response.body[0]).to.have.keys(['id', 'teamName']);
+      expect(response.body[0]).to.have.keys(
+        ['id', 'teamName']
+      );
     });
   });
 
