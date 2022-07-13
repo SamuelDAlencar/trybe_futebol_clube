@@ -12,13 +12,16 @@ const repository = new UserRepository();
 const service = new UserService(repository);
 
 
-describe('User services:', () => {
-  describe('userServices - "login" method', () => {
+describe('User Services:', () => {
+  describe('login - When all fields received are correct:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
         .resolves({
+          id: 1,
+          username: 'username',
+          role: 'user',
           email: 'email@email.com',
-          password: 'correctPassword',
+          password: 'password'
         } as UserModel);
 
       sinon.stub(jwt, 'sign')
@@ -30,7 +33,7 @@ describe('User services:', () => {
       (jwt.sign as sinon.SinonStub).restore();
     });
 
-    it('Should return an object containing a "token"', async () => {
+    it('It should return an object containing a "token"', async () => {
       const response = await service.login({
         email: 'email@email.com',
         password: 'correctPassword',
@@ -40,13 +43,15 @@ describe('User services:', () => {
     });
   });
 
-  describe('userServices - "validateRole" method', () => {
+  describe('validateRole - When it receives a token:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
         .resolves({
+          id: 1,
+          username: 'username',
+          role: 'user',
           email: 'email@email.com',
-          password: 'correctPassword',
-          role: 'admin'
+          password: 'password'
         } as UserModel);
 
       sinon.stub(jwt, 'verify')
@@ -59,8 +64,8 @@ describe('User services:', () => {
       (jwt.verify as sinon.SinonStub).restore();
     });
 
-    it('Should return an object containing a "role"', async () => {
-      const response = await service.validateRole('token. token.token');
+    it('It should return an object containing the user\'s "role"', async () => {
+      const response = await service.validateRole('token.token.token');
       
       expect(response).to.have.key('role');
       expect(response.role).to.be.oneOf(['user', 'admin']);

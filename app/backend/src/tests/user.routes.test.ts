@@ -17,8 +17,11 @@ describe('User routes:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
         .resolves({
+          id: 1,
+          username: 'username',
+          role: 'role',
           email: 'email@email.com',
-          password: 'correctPassword',
+          password: 'password'
         } as UserModel);
 
       sinon.stub(bcryptjs, 'compare')
@@ -33,7 +36,7 @@ describe('User routes:', () => {
       (jwt.sign as sinon.SinonStub).restore();
     });
 
-    it('It should return the status "OK", and the body containing a token', async () => {
+    it('It should return the status "OK", and the body containing a "token"', async () => {
       const response = await chai.request(app).post('/login').send({
         email: 'email@email.com',
         password: 'correctPassword',
@@ -47,17 +50,14 @@ describe('User routes:', () => {
   describe('POST => /login - When there are incorrect body fields:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
-        .resolves({
-          email: 'email@email.com',
-          password: 'hash',
-        } as UserModel);
+        .resolves(undefined);
     });
 
     after(() => {
       (UserModel.findOne as sinon.SinonStub).restore();
     });
 
-    it('It should return the status "Bad Request", and body containing the correct message if one of them is missing', async () => {
+    it('It should return the status "Bad Request", and body containing the correct "message" if one of them is missing', async () => {
       const response = await chai.request(app).post('/login').send({
         email: 'email@email.com',
       });
@@ -66,7 +66,7 @@ describe('User routes:', () => {
       expect(response.body).to.be.eql({ message: 'All fields must be filled' });
     });
 
-    it('It should return the status "Bad Request", and body containing the correct message if one of them is empty', async () => {
+    it('It should return the status "Bad Request", and body containing the correct "message" if one of them is empty', async () => {
       const response = await chai.request(app).post('/login').send({
         email: '',
         password: '',
@@ -76,7 +76,7 @@ describe('User routes:', () => {
       expect(response.body).to.be.eql({ message: 'All fields must be filled' });
     });
 
-    it('It should return the status "Unauthorized", and body containing the correct message if the email has an incorrect format', async () => {
+    it('It should return the status "Unauthorized", and body containing the correct "message" if the email has an incorrect format', async () => {
       const response = await chai.request(app).post('/login').send({
         email: 'incorrect email format',
         password: 'hash',
@@ -86,7 +86,7 @@ describe('User routes:', () => {
       expect(response.body).to.be.eql({ message: 'Incorrect email or password' });
     });
 
-    it('It should return the status "Unauthorized", and body containing the correct message if the password is incorrect', async () => {
+    it('It should return the status "Unauthorized", and body containing the correct "message" if the password is incorrect', async () => {
       const response = await chai.request(app).post('/login').send({
         email: 'email@email.com',
         password: 'Incorrect password',
@@ -101,9 +101,11 @@ describe('User routes:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
         .resolves({
+          id: 1,
+          username: 'username',
+          role: 'user',
           email: 'email@email.com',
-          password: 'correctPassword',
-          role: 'user'
+          password: 'password'
         } as UserModel);
       sinon.stub(bcryptjs, 'compare')
         .resolves(true);
@@ -118,7 +120,7 @@ describe('User routes:', () => {
       (jwt.verify as sinon.SinonStub).restore();
     });
 
-    it("It should return the 'OK' status, and the user's 'role'", async () => {
+    it('It should return the "OK" status, and the user\'s "role"', async () => {
       const response = await chai.request(app)
         .get('/login/validate')
         .set( 'authorization', 'token' );
