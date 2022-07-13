@@ -2,14 +2,16 @@ import * as jwt from 'jsonwebtoken';
 import * as bcryptjs from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import loginJoi from '../utils/validationJois';
-import Model from '../repository/user.repository';
+import UserRepository from '../repository/user.repository';
+import TeamRepository from '../repository/team.repository';
 
 const INCORRECT_FIELDS = 'Incorrect email or password';
 const TOKEN_NOT_FOUND = 'Token not found';
 const INVALID_TOKEN = 'Invalid or expired token';
 const SECRET = process.env.JWT_SECRET;
 
-const UserModel = new Model();
+const userRepository = new UserRepository();
+const teamRepository = new TeamRepository();
 
 const validateLogin = async (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginJoi.validate(req.body);
@@ -21,7 +23,7 @@ const validateLogin = async (req: Request, res: Response, next: NextFunction) =>
 
   const { email, password: reqPass } = req.body;
 
-  const user = await UserModel.findOneByEmail(email);
+  const user = await userRepository.findByEmail(email);
 
   if (!user) {
     return res.status(401).json({ message: INCORRECT_FIELDS });
@@ -46,7 +48,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
   try {
     const decoding = jwt.verify(token as string, SECRET as string) as jwt.JwtPayload;
 
-    const user = await UserModel.findOneByEmail(decoding.data.email);
+    const user = await userRepository.findByEmail(decoding.data.email);
 
     if (!user) {
       return res.status(401).json({ message: INVALID_TOKEN });
@@ -60,4 +62,16 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
   next();
 };
 
-export { validateLogin, validateToken };
+const teamExists = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  const user = await teamRepository.findByPk(Number(id));
+
+  if (!user) {
+    return res.status(404).json({ message: 'There is no team that corresponds with that id' });
+  }
+
+  next();
+};
+
+export { validateLogin, validateToken, teamExists };

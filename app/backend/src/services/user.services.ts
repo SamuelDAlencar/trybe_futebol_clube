@@ -14,7 +14,7 @@ export default class UserService implements IUserService {
   async login(data: TUser): Promise<TToken> {
     const { email, password } = data;
 
-    await this.model.findOneByEmail(email);
+    await this.model.findByEmail(email);
 
     const token = generateJwt({ email, password });
 
@@ -24,7 +24,7 @@ export default class UserService implements IUserService {
   async validateRole(token: string): Promise<TRole> {
     const decoding = jwt.verify(token, secret as string) as jwt.JwtPayload;
 
-    const { role } = await this.model.findOneByEmail(decoding.data.email) as TRole;
+    const { role } = await this.model.findByEmail(decoding.data.email) as TRole;
 
     return { role };
   }

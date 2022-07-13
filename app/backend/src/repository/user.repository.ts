@@ -7,7 +7,7 @@ export default class Repository implements IUserModel {
     this.model = model;
   }
 
-  async findOneByEmail(email: string): Promise<TUser> {
+  async findByEmail(email: string): Promise<TUser> {
     const user = await this.model
       .findOne({
         where: { email },

@@ -96,11 +96,41 @@ describe('Team routes:', () => {
       expect(response.status).to.be.equal(200);
     });
 
-    it('It should return the respective team', async () => {
+    it('It should return the respective "team"', async () => {
       const response = await chai.request(app).get('/teams/1');
 
       expect(response.body).to.be.an('object');
       expect(response.body).to.have.keys(['id', 'teamName']);
+      expect(response.body).to.be.eql({
+        id: 1,
+        teamName: 'Avaí/Kindermann'
+      });
+    });
+  });
+
+  describe('GET => /teams:id - When there is NO team that corresponds with the id received:', () => {
+    before(() => {
+      sinon.stub(TeamModel, 'findOne')
+        .resolves(undefined);
+    });
+
+    after(() => {
+      (TeamModel.findOne as sinon.SinonStub).restore();
+    });
+    
+    it('It should return the status "Not Found"', async () => {
+      const response = await chai.request(app).get('/teams/9999999999');
+
+      expect(response.status).to.be.equal(404);
+    });
+
+    it('It should return the correct "message"', async () => {
+      const response = await chai.request(app).get('/teams/99999999999');
+
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.be.eql({
+        message: 'There is no team that corresponds with that id'
+      });
     });
   });
 });

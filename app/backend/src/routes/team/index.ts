@@ -2,6 +2,7 @@ import * as express from 'express';
 import TeamController from '../../controllers/team.controller';
 import TeamServices from '../../services/team.services';
 import TeamRepository from '../../repository/team.repository';
+import { teamExists } from '../../middlewares';
 
 const entityFactory = () => {
   const repository = new TeamRepository();
@@ -13,8 +14,8 @@ const entityFactory = () => {
 
 const router = express.Router();
 
-router.get('/', (req, res) => entityFactory().getTeams(req, res));
+router.get('/', (req, res) => entityFactory().getAllTeams(req, res));
 
-router.get('/:id', (req, res) => entityFactory().getTeamById(req, res));
+router.get('/:id', teamExists, (req, res) => entityFactory().getTeamById(req, res));
 
 export default router;

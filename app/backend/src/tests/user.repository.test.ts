@@ -28,7 +28,7 @@ describe('User repository:', () => {
     });
 
     it('It should return the respective user\'s infos', async () => {
-      const response = await userRepository.findOneByEmail('email@email.com');
+      const response = await userRepository.findByEmail('email@email.com');
     
       expect(response).to.be.an('object');
       expect(response).to.have.keys(['id', 'username', 'role', 'email', 'password']);
