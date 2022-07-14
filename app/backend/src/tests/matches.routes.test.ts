@@ -66,4 +66,28 @@ describe('Match routes:', () => {
       );
     });
   });
+
+  describe('GET => /matches - When there are NO matches on the list:', () => {
+    before(() => {
+      sinon.stub(MatchModel, 'findAll')
+      .resolves([] as any);
+    });
+
+    after(() => {
+      (MatchModel.findAll as sinon.SinonStub).restore();
+    });
+
+    it('It should return the status "OK"', async () => {
+      const response = await chai.request(app).get('/matches');
+
+      expect(response.status).to.be.equal(200);
+    });
+
+    it('It should return an empty array', async () => {
+      const response = await chai.request(app).get('/matches');
+
+      expect(response.body).to.be.an('array');
+      expect(response.body).to.have.length(0);
+    });
+  });
 });

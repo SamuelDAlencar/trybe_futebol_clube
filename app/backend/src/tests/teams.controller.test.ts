@@ -89,7 +89,7 @@ describe('Team Controller', () => {
     });
   });
 
-  describe('getTeamById - When there is a team that corresponds with the id received:', () => {
+  describe('getTeamById - When there is a team that corresponds with the "id" received:', () => {
     const req = { params: { id: 1 } } as any;
     const res = {} as any;
 

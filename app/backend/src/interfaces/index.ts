@@ -13,7 +13,7 @@ export interface IUserModel {
 // Team Files
 export interface ITeamModel {
   findAll(): Promise<TTeam[]>;
-  findByPk(id: number): Promise<TTeam>;
+  findById(id: number): Promise<TTeam>;
 }
 
 export interface ITeamService {

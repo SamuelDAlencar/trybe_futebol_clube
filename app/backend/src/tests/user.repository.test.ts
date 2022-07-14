@@ -3,8 +3,6 @@ import * as sinon from 'sinon';
 import { it } from 'mocha';
 const { expect } = chai;
 
-import { IUserModel } from '../interfaces';
-import { TUser } from '../types';
 import UserModel from '../database/models/users';
 import UserRepository from '../repository/user.repository';
 

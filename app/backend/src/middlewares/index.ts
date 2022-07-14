@@ -65,7 +65,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
 const teamExists = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
-  const user = await teamRepository.findByPk(Number(id));
+  const user = await teamRepository.findById(Number(id));
 
   if (!user) {
     return res.status(404).json({ message: 'There is no team that corresponds with that id' });
