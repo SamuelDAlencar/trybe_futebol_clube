@@ -1,4 +1,4 @@
-import { TRole, TTeam, TToken, TUser } from '../types';
+import { TRole, TTeam, TToken, TUser, TMatch } from '../types';
 
 // User Files
 export interface IUserService {
@@ -19,4 +19,12 @@ export interface ITeamModel {
 export interface ITeamService {
   getAllTeams(): Promise<TTeam[]>;
   getTeamById(id: number): Promise<TTeam>;
+}
+
+export interface IMatchModel {
+  findAll(): Promise<TMatch[]>;
+}
+
+export interface IMatchService {
+  getAllMatches(): Promise<TMatch[]>;
 }

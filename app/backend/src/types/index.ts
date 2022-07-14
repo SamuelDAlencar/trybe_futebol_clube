@@ -18,3 +18,14 @@ export type TToken = {
 export type TRole = {
   role: 'admin' | 'user'
 };
+
+export type TMatch = {
+  id: number;
+  homeTeam: number;
+  homeTeamGoals: number;
+  awayTeam: number;
+  awayTeamGoals: number;
+  inProgress: number;
+  teamHome: string;
+  teamAway: string;
+};

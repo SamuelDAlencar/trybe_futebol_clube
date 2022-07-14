@@ -7,7 +7,6 @@ const { expect } = chai;
 
 import { app } from '../app';
 import TeamModel from '../database/models/teams';
-import Team from '../database/models/teams';
 
 chai.use(chaiHttp);
 
@@ -28,7 +27,7 @@ describe('Team routes:', () => {
             id: 3,
             teamName: 'Botafogo'
           }
-        ] as Team[]);
+        ] as TeamModel[]);
     });
 
     after(() => {
@@ -55,7 +54,7 @@ describe('Team routes:', () => {
   describe('GET => /teams - When there are NO teams on the list:', () => {
     before(() => {
       sinon.stub(TeamModel, 'findAll')
-        .resolves([] as Team[]);
+        .resolves([] as TeamModel[]);
     });
 
     after(() => {
@@ -83,7 +82,7 @@ describe('Team routes:', () => {
         .resolves({
           id: 1,
           teamName: 'Avaí/Kindermann'
-        } as Team);
+        } as TeamModel);
     });
 
     after(() => {

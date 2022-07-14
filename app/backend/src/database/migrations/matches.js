@@ -6,9 +6,21 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
-      homeTeam: Sequelize.INTEGER,
+      homeTeam: {
+        type: Sequelize.INTEGER,
+        // references: {
+          // model: 'Teams',
+          // key: 'id',
+        // }
+      },
       homeTeamGoals: Sequelize.INTEGER,
-      awayTeam: Sequelize.INTEGER,
+      awayTeam: {
+        type: Sequelize.INTEGER,
+        // references: {
+          // model: 'Teams',
+          // key: 'id',
+        // }
+      },
       awayTeamGoals: Sequelize.INTEGER,
       inProgress: Sequelize.INTEGER,
     });
