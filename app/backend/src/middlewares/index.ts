@@ -69,8 +69,6 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
       return res.status(401).json({ message: INVALID_TOKEN });
     }
   } catch (err) {
-    console.log(err);
-
     return res.status(401).json({ message: INVALID_TOKEN });
   }
 

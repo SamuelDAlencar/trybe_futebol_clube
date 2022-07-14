@@ -97,7 +97,38 @@ describe('User routes:', () => {
     });
   })
 
-  describe('GET => /login/validate:', () => {
+  describe('POST => /login - When the password doesn\'t match:', () => {
+    before(() => {
+      sinon.stub(UserModel, 'findOne')
+        .resolves({
+          id: 1,
+          username: 'username',
+          role: 'role',
+          email: 'email@email.com',
+          password: 'password'
+        } as UserModel);
+
+      sinon.stub(bcryptjs, 'compare')
+        .resolves(false);
+    });
+
+    after(() => {
+      (UserModel.findOne as sinon.SinonStub).restore();
+      (bcryptjs.compare as sinon.SinonStub).restore();
+    });
+
+    it('It should return the status "Unauthorized", and body containing the correct "message" if the password', async () => {
+      const response = await chai.request(app).post('/login').send({
+        email: 'email@email.com',
+        password: 'Incorrect password',
+      });
+    
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.eql({ message: 'Incorrect email or password' });
+    });
+  });
+
+  describe('GET => /login/validate - If the user has the authorization:', () => {
     before(() => {
       sinon.stub(UserModel, 'findOne')
         .resolves({
@@ -127,6 +158,92 @@ describe('User routes:', () => {
     
       expect(response.status).to.be.equal(200);
       expect(response.body).to.have.key('role');
+    });
+  });
+
+  describe('GET => /login/validate - If there is no authorization:', () => {
+    before(() => {
+      sinon.stub(UserModel, 'findOne')
+        .resolves({
+          id: 1,
+          username: 'username',
+          role: 'user',
+          email: 'email@email.com',
+          password: 'password'
+        } as UserModel);
+      sinon.stub(bcryptjs, 'compare')
+        .resolves(true);
+    });
+
+    after(() => {
+      (UserModel.findOne as sinon.SinonStub).restore();
+      (bcryptjs.compare as sinon.SinonStub).restore();
+    });
+
+    it('It should return the "Unauthorized" status, and the correct message', async () => {
+      const response = await chai.request(app).get('/login/validate');
+    
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.eql({ message: 'Token not found' });
+    });
+  });
+
+  describe('GET => /login/validate - If the token is invalid:', () => {
+    before(() => {
+      sinon.stub(UserModel, 'findOne')
+        .resolves({
+          id: 1,
+          username: 'username',
+          role: 'user',
+          email: 'email@email.com',
+          password: 'password'
+        } as UserModel);
+      sinon.stub(bcryptjs, 'compare')
+        .resolves(true);
+      sinon.stub(jwt, 'verify')
+        .returns(false as any);
+    });
+
+    after(() => {
+      (UserModel.findOne as sinon.SinonStub).restore();
+      (bcryptjs.compare as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
+    });
+
+    it('It should return the "Unauthorized" status, and the correct message', async () => {
+      const response = await chai.request(app)
+        .get('/login/validate')
+        .set( 'authorization', 'token' );
+    
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.eql({ message: 'Invalid or expired token' });
+    });
+  });
+
+  describe('GET => /login/validate - If there is no user that corresponds with the token payload:', () => {
+    before(() => {
+      sinon.stub(UserModel, 'findOne')
+        .resolves(undefined);
+      sinon.stub(bcryptjs, 'compare')
+        .resolves(true);
+      sinon.stub(jwt, 'verify')
+        .returns({ data: { email: 'email@email.com' }
+      } as any);
+    });
+
+    after(() => {
+      (UserModel.findOne as sinon.SinonStub).restore();
+      (bcryptjs.compare as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
+    });
+
+    it('It should return the "Unauthorized" status, and the correct message', async () => {
+      const response = await chai.request(app)
+        .get('/login/validate')
+        .set( 'authorization', 'token' );
+    
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.eql({ message: 'Invalid or expired token' });
     });
   });
 })
