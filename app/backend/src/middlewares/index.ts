@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import * as bcryptjs from 'bcryptjs';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 import loginJoi from '../utils/validationJois';
 import UserRepository from '../repository/user.repository';
 import TeamRepository from '../repository/team.repository';
@@ -12,6 +12,21 @@ const SECRET = process.env.JWT_SECRET;
 
 const userRepository = new UserRepository();
 const teamRepository = new TeamRepository();
+
+const errorHandler: ErrorRequestHandler = (
+  err,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (err) {
+    console.log(err);
+
+    return res.status(500).json({ message: 'Server side error' });
+  }
+
+  next();
+};
 
 const validateLogin = async (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginJoi.validate(req.body);
@@ -74,4 +89,4 @@ const teamExists = async (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export { validateLogin, validateToken, teamExists };
+export { errorHandler, validateLogin, validateToken, teamExists };

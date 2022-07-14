@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import mainRouter from './routes';
+import { errorHandler } from './middlewares';
 
 class App {
   public app: express.Express;
@@ -11,6 +12,8 @@ class App {
     this.config();
 
     this.app.use(mainRouter);
+
+    this.app.use(errorHandler);
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
