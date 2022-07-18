@@ -20,12 +20,12 @@ export type TRole = {
 };
 
 export type TMatch = {
-  id: number;
+  id?: number;
   homeTeam: number;
   homeTeamGoals: number;
   awayTeam: number;
   awayTeamGoals: number;
-  inProgress: number;
-  teamHome: string;
-  teamAway: string;
+  inProgress?: boolean | number;
+  teamHome?: string;
+  teamAway?: string;
 };

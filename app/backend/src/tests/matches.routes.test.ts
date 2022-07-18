@@ -90,4 +90,55 @@ describe('Match routes:', () => {
       expect(response.body).to.have.length(0);
     });
   });
+
+//   describe('POST => /matches - When all body fields are correct', () => {
+//     before(() => {
+
+//     });
+
+//     after(() => {
+      
+//     });
+
+//     it('It should return the "Created" status', async () => {
+//       const response = await chai.request(app)
+//         .post('/matches')
+//         .send({
+//           homeTeam: 16,
+//           awayTeam: 8,
+//           homeTeamGoals: 2,
+//           awayTeamGoals: 2
+//         });
+
+//       expect(response.status).to.be.equal(201);
+//       expect(response.status).to.be.eql({
+//         id: 1,
+//         homeTeam: 16,
+//         homeTeamGoals: 2,
+//         awayTeam: 8,
+//         awayTeamGoals: 2,
+//         inProgress: true,
+//       });
+//     });
+
+//     it('It should return the match\'s data inside the body', async () => {
+//       const response = await chai.request(app)
+//         .post('/matches')
+//         .send({
+//           homeTeam: 16,
+//           awayTeam: 8,
+//           homeTeamGoals: 2,
+//           awayTeamGoals: 2
+//         });
+
+//       expect(response.status).to.be.eql({
+//         id: 1,
+//         homeTeam: 16,
+//         homeTeamGoals: 2,
+//         awayTeam: 8,
+//         awayTeamGoals: 2,
+//         inProgress: true,
+//       });
+//     });
+//   });
 });

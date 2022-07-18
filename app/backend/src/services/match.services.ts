@@ -11,4 +11,11 @@ export default class MatchService implements IMatchService {
 
     return matches;
   }
+
+  async postMatch(data: TMatch): Promise<TMatch> {
+    const match = await this.model.postMatch(data);
+    match.inProgress = true;
+
+    return match;
+  }
 }

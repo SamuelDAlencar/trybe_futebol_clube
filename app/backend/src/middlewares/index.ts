@@ -1,13 +1,13 @@
 import * as jwt from 'jsonwebtoken';
 import * as bcryptjs from 'bcryptjs';
 import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
-import loginJoi from '../utils/validationJois';
+import { loginJoi, matchJoi } from '../utils/validationJois';
 import UserRepository from '../repository/user.repository';
 import TeamRepository from '../repository/team.repository';
 
 const INCORRECT_FIELDS = 'Incorrect email or password';
 const TOKEN_NOT_FOUND = 'Token not found';
-const INVALID_TOKEN = 'Invalid or expired token';
+const INVALID_TOKEN = 'Token must be a valid token';
 const SECRET = process.env.JWT_SECRET;
 
 const userRepository = new UserRepository();
@@ -19,7 +19,7 @@ const errorHandler: ErrorRequestHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  if (err) {
+  if (!err.status) {
     console.log(err);
 
     return res.status(500).json({ message: 'Server side error' });
@@ -87,4 +87,29 @@ const teamExists = async (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export { errorHandler, validateLogin, validateToken, teamExists };
+const validateMatchPost = async (req: Request, res: Response, next: NextFunction) => {
+  const { homeTeam: homeTeamId, awayTeam: awayTeamId } = req.body;
+
+  const { error } = matchJoi.validate(req.body);
+
+  if (error) {
+    return res.status(error.message.includes('filled') ? 400 : 401)
+      .json({ message: error.message });
+  }
+
+  const homeTeam = await teamRepository.findById(homeTeamId);
+  const awayTeam = await teamRepository.findById(awayTeamId);
+
+  if (homeTeamId === awayTeamId) {
+    return res.status(401)
+      .json({ message: 'It is not possible to create a match with two equal teams' });
+  }
+
+  if (!homeTeam || !awayTeam) {
+    return res.status(404).json({ message: 'There is no team with such id!' });
+  }
+
+  next();
+};
+
+export { errorHandler, validateLogin, validateToken, teamExists, validateMatchPost };

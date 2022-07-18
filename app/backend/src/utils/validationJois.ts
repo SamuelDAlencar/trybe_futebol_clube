@@ -15,4 +15,20 @@ const loginJoi = Joi.object({
   }),
 });
 
-export default loginJoi;
+const matchJoi = Joi.object({
+  homeTeam: Joi.number().required().messages({
+    'any.required': MISSING_FIELDS,
+  }),
+  awayTeam: Joi.number().required().messages({
+    'any.required': MISSING_FIELDS,
+  }),
+  homeTeamGoals: Joi.number().required().messages({
+    'any.required': MISSING_FIELDS,
+  }),
+  awayTeamGoals: Joi.number().required().messages({
+    'any.required': MISSING_FIELDS,
+  }),
+  inProgress: Joi.boolean(),
+});
+
+export { loginJoi, matchJoi };

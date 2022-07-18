@@ -23,8 +23,10 @@ export interface ITeamService {
 
 export interface IMatchModel {
   findAll(): Promise<TMatch[]>;
+  postMatch(data: TMatch): Promise<TMatch>;
 }
 
 export interface IMatchService {
   getAllMatches(): Promise<TMatch[]>;
+  postMatch(data: TMatch): Promise<TMatch>;
 }

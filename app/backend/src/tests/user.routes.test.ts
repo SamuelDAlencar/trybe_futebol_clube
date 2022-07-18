@@ -216,7 +216,7 @@ describe('User routes:', () => {
         .set( 'authorization', 'token' );
     
       expect(response.status).to.be.equal(401);
-      expect(response.body).to.be.eql({ message: 'Invalid or expired token' });
+      expect(response.body).to.be.eql({ message: 'Token must be a valid token' });
     });
   });
 
@@ -243,7 +243,7 @@ describe('User routes:', () => {
         .set( 'authorization', 'token' );
     
       expect(response.status).to.be.equal(401);
-      expect(response.body).to.be.eql({ message: 'Invalid or expired token' });
+      expect(response.body).to.be.eql({ message: 'Token must be a valid token' });
     });
   });
 })

@@ -11,4 +11,10 @@ export default class MatchController {
 
     return res.status(200).json(matches);
   }
+
+  async postMatch(req: Request, res: Response) {
+    const match = await this.service.postMatch(req.body);
+
+    return res.status(201).json(match);
+  }
 }

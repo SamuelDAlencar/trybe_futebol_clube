@@ -24,4 +24,12 @@ export default class Repository implements IMatchModel {
 
     return matches as TMatch[];
   }
+
+  async postMatch(data: TMatch): Promise<TMatch> {
+    const fixedData = { ...data, inProgress: 1 };
+
+    const match = await this.model.create(fixedData);
+
+    return match;
+  }
 }
