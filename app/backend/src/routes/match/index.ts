@@ -2,7 +2,7 @@ import * as express from 'express';
 import MatchController from '../../controllers/match.controller';
 import MatchServices from '../../services/match.services';
 import MatchRepository from '../../repository/match.repository';
-import { validateMatchPost, validateToken } from '../../middlewares';
+import { matchExists, validateMatchPost, validateToken } from '../../middlewares';
 
 const entityFactory = () => {
   const repository = new MatchRepository();
@@ -23,6 +23,8 @@ router.post(
   (req, res) => entityFactory().postMatch(req, res),
 );
 
-router.patch('/:id/finish', (req, res) => entityFactory().finishMatch(req, res));
+router.patch('/:id', matchExists, (req, res) => entityFactory().updateMatch(req, res));
+
+router.patch('/:id/finish', matchExists, (req, res) => entityFactory().finishMatch(req, res));
 
 export default router;

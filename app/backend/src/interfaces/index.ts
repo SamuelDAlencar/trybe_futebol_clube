@@ -1,4 +1,4 @@
-import { TRole, TTeam, TToken, TUser, TMatch } from '../types';
+import { TRole, TTeam, TToken, TUser, TMatch, TMatchUpdate } from '../types';
 
 // User Files
 export interface IUserService {
@@ -23,12 +23,15 @@ export interface ITeamService {
 
 export interface IMatchModel {
   findAll(): Promise<TMatch[]>;
+  findById(id: number): Promise<TMatch>;
   postMatch(data: TMatch): Promise<TMatch>;
   finishMatch(id: number): Promise<void>;
+  updateMatch(id: number, update: TMatchUpdate): Promise<void>;
 }
 
 export interface IMatchService {
   getAllMatches(): Promise<TMatch[]>;
   postMatch(data: TMatch): Promise<TMatch>;
   finishMatch(id: number): Promise<void>;
+  updateMatch(id: number, update: TMatchUpdate): Promise<void>;
 }

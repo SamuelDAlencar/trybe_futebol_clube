@@ -4,6 +4,7 @@ import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 import { loginJoi, matchJoi } from '../utils/validationJois';
 import UserRepository from '../repository/user.repository';
 import TeamRepository from '../repository/team.repository';
+import MatchRepository from '../repository/match.repository';
 
 const INCORRECT_FIELDS = 'Incorrect email or password';
 const TOKEN_NOT_FOUND = 'Token not found';
@@ -12,6 +13,7 @@ const SECRET = process.env.JWT_SECRET;
 
 const userRepository = new UserRepository();
 const teamRepository = new TeamRepository();
+const matchRepository = new MatchRepository();
 
 const errorHandler: ErrorRequestHandler = (
   err,
@@ -87,6 +89,18 @@ const teamExists = async (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const matchExists = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  const user = await matchRepository.findById(Number(id));
+
+  if (!user) {
+    return res.status(404).json({ message: 'There is no match that corresponds with that id' });
+  }
+
+  next();
+};
+
 const validateMatchPost = async (req: Request, res: Response, next: NextFunction) => {
   const { homeTeam: homeTeamId, awayTeam: awayTeamId } = req.body;
 
@@ -112,4 +126,4 @@ const validateMatchPost = async (req: Request, res: Response, next: NextFunction
   next();
 };
 
-export { errorHandler, validateLogin, validateToken, teamExists, validateMatchPost };
+export { errorHandler, validateLogin, validateToken, teamExists, validateMatchPost, matchExists };

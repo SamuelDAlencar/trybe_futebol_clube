@@ -29,3 +29,8 @@ export type TMatch = {
   teamHome?: string;
   teamAway?: string;
 };
+
+export type TMatchUpdate = {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+};

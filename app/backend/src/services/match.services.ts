@@ -1,4 +1,4 @@
-import { TMatch } from '../types';
+import { TMatch, TMatchUpdate } from '../types';
 import { IMatchModel, IMatchService } from '../interfaces';
 
 export default class MatchService implements IMatchService {
@@ -21,5 +21,12 @@ export default class MatchService implements IMatchService {
 
   async finishMatch(id: number): Promise<void> {
     await this.model.finishMatch(id);
+  }
+
+  async updateMatch(id: number, update: TMatchUpdate): Promise<void> {
+    const awayTeamGoals = Number(update.awayTeamGoals);
+    const homeTeamGoals = Number(update.homeTeamGoals);
+
+    await this.model.updateMatch(id, { awayTeamGoals, homeTeamGoals });
   }
 }
