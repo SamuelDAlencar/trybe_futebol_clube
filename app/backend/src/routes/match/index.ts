@@ -23,4 +23,6 @@ router.post(
   (req, res) => entityFactory().postMatch(req, res),
 );
 
+router.patch('/:id/finish', (req, res) => entityFactory().finishMatch(req, res));
+
 export default router;

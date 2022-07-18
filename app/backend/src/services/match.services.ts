@@ -18,4 +18,8 @@ export default class MatchService implements IMatchService {
 
     return match;
   }
+
+  async finishMatch(id: number): Promise<void> {
+    await this.model.finishMatch(id);
+  }
 }
