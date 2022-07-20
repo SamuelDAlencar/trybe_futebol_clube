@@ -1,13 +1,13 @@
-import { TRole, TTeam, TToken, TUser, TMatch, TMatchUpdate } from '../types';
+import { TRole, TTeam, TToken, TUser, TMatch, TMatchUpdate, TLeaderboard } from '../types';
 
 // User Files
+export interface IUserModel {
+  findByEmail(email: string): Promise<TUser>;
+}
+
 export interface IUserService {
   login(data: TUser): Promise<TToken>;
   validateRole(token: string): Promise<TRole>;
-}
-
-export interface IUserModel {
-  findByEmail(email: string): Promise<TUser>;
 }
 
 // Team Files
@@ -34,4 +34,13 @@ export interface IMatchService {
   postMatch(data: TMatch): Promise<TMatch>;
   finishMatch(id: number): Promise<void>;
   updateMatch(id: number, update: TMatchUpdate): Promise<void>;
+}
+
+export interface ILeaderboardModel {
+  findAllTeams(): Promise<TTeam[]>;
+  findAllMatches(): Promise<TMatch[]>;
+}
+
+export interface ILeaderboardService {
+  getLeaderboard(): Promise<TLeaderboard[]>;
 }
