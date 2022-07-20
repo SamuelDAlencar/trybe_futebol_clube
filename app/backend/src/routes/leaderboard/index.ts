@@ -13,6 +13,8 @@ const entityFactory = () => {
 
 const router = express.Router();
 
-router.get('/home', (req, res) => entityFactory().getLeaderboard(req, res));
+router.get('/home', (req, res) => entityFactory().getHomeLeaderboard(req, res));
+
+router.get('/away', (req, res) => entityFactory().getAwayLeaderboard(req, res));
 
 export default router;

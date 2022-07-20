@@ -42,5 +42,6 @@ export interface ILeaderboardModel {
 }
 
 export interface ILeaderboardService {
-  getLeaderboard(): Promise<TLeaderboard[]>;
+  getHomeLeaderboard(): Promise<TLeaderboard[]>;
+  getAwayLeaderboard(): Promise<TLeaderboard[]>;
 }
