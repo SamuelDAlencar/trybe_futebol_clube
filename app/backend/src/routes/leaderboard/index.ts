@@ -17,4 +17,6 @@ router.get('/home', (req, res) => entityFactory().getHomeLeaderboard(req, res));
 
 router.get('/away', (req, res) => entityFactory().getAwayLeaderboard(req, res));
 
+router.get('/', (req, res) => entityFactory().getLeaderboard(req, res));
+
 export default router;

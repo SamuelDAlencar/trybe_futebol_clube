@@ -1,5 +1,29 @@
 import { TLeaderboard, TMatch, TTeam } from '../types';
 
+const createLeaderboard = (team: TTeam, match: TMatch, currentTeam: TLeaderboard): TLeaderboard => {
+  const teamLeaderboard = currentTeam;
+
+  if (team.id === match.awayTeam) {
+    teamLeaderboard.goalsFavor += match.awayTeamGoals;
+    teamLeaderboard.goalsOwn += match.homeTeamGoals;
+
+    if (match.awayTeamGoals > match.homeTeamGoals) {
+      teamLeaderboard.totalPoints += 3;
+      teamLeaderboard.totalVictories += 1;
+    } else if (match.awayTeamGoals < match.homeTeamGoals) { teamLeaderboard.totalLosses += 1; }
+  } else if (team.id === match.homeTeam) {
+    teamLeaderboard.goalsOwn += match.awayTeamGoals;
+    teamLeaderboard.goalsFavor += match.homeTeamGoals;
+
+    if (match.awayTeamGoals < match.homeTeamGoals) {
+      teamLeaderboard.totalPoints += 3;
+      teamLeaderboard.totalVictories += 1;
+    } else if (match.awayTeamGoals > match.homeTeamGoals) { teamLeaderboard.totalLosses += 1; }
+  }
+
+  return teamLeaderboard;
+};
+
 const createAwayLB = (team: TTeam, match: TMatch, currentTeam: TLeaderboard): TLeaderboard => {
   const teamLeaderboard = currentTeam;
 
@@ -64,4 +88,10 @@ const sortLeaderboard = (leaderboard: TLeaderboard[]): TLeaderboard[] => leaderb
     || b.totalVictories - a.totalVictories || b.goalsBalance - a.goalsBalance
     || b.goalsFavor - a.goalsFavor || a.goalsOwn - b.goalsOwn);
 
-export { leaderboardTemplate, createHomeLB, createAwayLB, sortLeaderboard };
+export {
+  leaderboardTemplate,
+  createLeaderboard,
+  createHomeLB,
+  createAwayLB,
+  sortLeaderboard,
+};

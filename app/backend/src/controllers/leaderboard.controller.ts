@@ -6,6 +6,12 @@ export default class LeaderboardController {
     this.service = service;
   }
 
+  async getLeaderboard(req: Request, res: Response) {
+    const leaderBoard = await this.service.getLeaderboard();
+
+    return res.status(200).json(leaderBoard);
+  }
+
   async getHomeLeaderboard(req: Request, res: Response) {
     const leaderBoard = await this.service.getHomeLeaderboard();
 
