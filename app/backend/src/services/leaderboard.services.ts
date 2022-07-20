@@ -16,7 +16,7 @@ export default class LeaderboardService implements ILeaderboardService {
       leaderboard[i] = leaderboardTemplate(team.teamName);
 
       matches.forEach((match) => {
-        if (match.inProgress === 0 && (team.id === match.awayTeam || team.id === match.homeTeam)) {
+        if (match.inProgress === 0 && team.id === match.homeTeam) {
           leaderboard[i] = createLeaderboard(team, match, leaderboard[i]);
           leaderboard[i].totalGames += 1;
 
@@ -32,10 +32,6 @@ export default class LeaderboardService implements ILeaderboardService {
 
       leaderboard[i].goalsBalance = leaderboard[i].goalsFavor - leaderboard[i].goalsOwn;
     });
-
-    console.log(leaderboard.sort((a, b) => b.totalPoints - a.totalPoints
-    || b.totalVictories - a.totalVictories || b.goalsBalance - a.goalsBalance
-    || b.goalsFavor - a.goalsFavor || a.goalsOwn - b.goalsOwn));
 
     return leaderboard.sort((a, b) => b.totalPoints - a.totalPoints
       || b.totalVictories - a.totalVictories || b.goalsBalance - a.goalsBalance
