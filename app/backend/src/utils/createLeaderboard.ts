@@ -21,8 +21,6 @@ const createLeaderboard = (team: TTeam, match: TMatch, currentTeam: TLeaderboard
     } else if (match.awayTeamGoals > match.homeTeamGoals) { teamLeaderboard.totalLosses += 1; }
   }
 
-  if (match.awayTeamGoals === match.homeTeamGoals) { teamLeaderboard.totalPoints += 1; }
-
   return teamLeaderboard;
 };
 
