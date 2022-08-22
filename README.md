@@ -35,3 +35,21 @@ Neste projeto foram feitos testes unitários e testes de integração, para exec
 Os testes cobrem as rotas da API, os middlewares, as camadas de controller, service e models
 
 > ⚠ Testes das camadas de service e model das partidas ainda em progresso ⚠
+
+## 🧰 Construído com
+
+* [Typescript](https://www.typescriptlang.org/) - Superset Js
+* [Node](https://nodejs.org/en/) - Campo de execução
+* [Express.js](https://expressjs.com/) - Framework node
+* [Sequelize](https://sequelize.org/) - ORM
+* [JWT](https://jwt.io/) - Criação/validação de tokens
+* [Eslint](https://eslint.org/) - Padronização de código
+* [MySQL](https://www.mysql.com/) - Banco relacional
+* [Docker](https://www.docker.com/) - Serviço de containerização
+* [Mocha](https://mochajs.org/) - Framework de testes node
+* [Chai](https://www.chaijs.com/) - Lib de assertions node
+* [Sinon](https://sinonjs.org/) - Framework de mocks Js
+
+## 📄 Licença
+
+Requisitos e ideia base do projeto feita pela [Trybe](https://www.betrybe.com/)
