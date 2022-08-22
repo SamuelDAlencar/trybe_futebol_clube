@@ -33,3 +33,5 @@ Neste projeto foram feitos testes unitários e testes de integração, para exec
 > Mesmo tendo inicializado a aplicação via Docker, para executar os testes é necessário instalar as dependências (`npm run install:apps` na raiz)
 
 Os testes cobrem as rotas da API, os middlewares, as camadas de controller, service e models
+
+> ⚠ Testes das camadas de service e model das partidas ainda em progresso ⚠
