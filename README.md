@@ -1,6 +1,6 @@
 # ⚽ Trybe Futebol Clube
 
-### [🇧🇷 Portuguese]
+# [🇧🇷 Portuguese]
 
 Projeto back-end (front e toda a estilização feita pelo time da Trybe!) que consiste em um CRUD de times e partidas de futebol, permitindo o usuário logar na aplicação, conferir partidas, filtra-las por "Em andamento" ou "Concluídas" e conferir a lista das classificações dos times, filtrando-os por "Mandantes" e "Visitantes"!
 
@@ -58,7 +58,7 @@ Os testes cobrem as rotas da API, os middlewares, as camadas de controller, serv
 
 Requisitos, front-end e ideia base do projeto feita pela [Trybe](https://www.betrybe.com/)
 
-### [🇺🇸 English]
+# [🇺🇸 English]
 
 Back-end project (front-end code and styling done by Trybe's team!) consisting of a CRUD of soccer teams and matches, allowing the user to log into the application, check out matches, filter them by "In Progress" or "Finished" and check out the list of team standings, filtering them by "Home" and "Away"!
 
