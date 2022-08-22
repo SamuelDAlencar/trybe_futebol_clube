@@ -12,4 +12,7 @@ Depois de clonado, caso opte por rodar a aplicação *sem Docker*, instale as de
 ```
 npm run install:apps
 ```
+Para startar a aplicação sem docker, é necessario ter uma instância do MySQL rodando na porta `3306`
+> Por default, a senha do banco que a aplicação espera é "123456", mas caso tenha colocado uma senha própria, lembre de atualizar o arquivo de configuração do [sequelize](https://sequelize.org/) na pasta `/app/backend/src/database/config`
+
 E então para iniciar a aplicação, entre em `app/backend` e `app/backend`, e rode o comando `npm start` em *ambos*
