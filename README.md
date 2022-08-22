@@ -18,4 +18,4 @@ Para startar a aplicação sem docker, é necessario ter uma instância do MySQL
 E então para iniciar a aplicação, entre em `app/backend` e `app/backend`, e rode o comando `npm start` em *ambos*
 > Caso queira rodar em modo de desenvolvimento, quando entrar na `app/backend`, rode `npm run dev` ao invés de `npm start`
 
-Caso tenha optado por iniciar a aplicação via *Docker*, basta rodar `npm run compose:up` na pasta `/app`. E inicializar em modo de desenvolvimento: `npm run compose:up:dev`
+Caso tenha optado por iniciar a aplicação via *Docker*, basta rodar `npm run compose:up` na pasta `/app`. Se quiser inicializar em modo de desenvolvimento: `npm run compose:up:dev`
