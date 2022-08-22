@@ -27,6 +27,8 @@ E então para iniciar a aplicação, entre em `app/backend` e `app/backend`, e r
 
 Caso tenha optado por iniciar a aplicação via *Docker*, basta rodar `npm run compose:up` na pasta `/app`. Se quiser inicializar em modo de desenvolvimento: `npm run compose:up:dev`
 
+Para acessar a aplicação e testa-la manualmente, acesse a pagina `http://localhost:3000/login`
+
 ## ⚙ Executando testes
 
 Neste projeto foram feitos testes unitários e testes de integração, para executa-los, basta acessar a pasta `app/backend` e rodar o comando `npm test`
