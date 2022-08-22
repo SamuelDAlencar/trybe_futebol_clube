@@ -8,3 +8,8 @@ Clone o projeto em sua maquina rodando o seguinte comando no terminal:
 ```
 git clone git@github.com:SamuelDAlencar/trybe_futebol_clube.git
 ```
+Depois de clonado, caso opte por rodar a aplicação *sem Docker*, instale as dependências de ambos front e back com:
+```
+npm run install:apps
+```
+E então para iniciar a aplicação, entre em `app/backend` e `app/backend`, e rode o comando `npm start` em *ambos*
