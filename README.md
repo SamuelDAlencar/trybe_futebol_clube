@@ -54,4 +54,4 @@ Os testes cobrem as rotas da API, os middlewares, as camadas de controller, serv
 
 ## 📄 Licença
 
-Requisitos e ideia base do projeto feita pela [Trybe](https://www.betrybe.com/)
+Requisitos, front-end e ideia base do projeto feita pela [Trybe](https://www.betrybe.com/)
