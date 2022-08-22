@@ -26,3 +26,10 @@ E então para iniciar a aplicação, entre em `app/backend` e `app/backend`, e r
 > Caso queira rodar em modo de desenvolvimento, quando entrar na `app/backend`, rode `npm run dev` ao invés de `npm start`
 
 Caso tenha optado por iniciar a aplicação via *Docker*, basta rodar `npm run compose:up` na pasta `/app`. Se quiser inicializar em modo de desenvolvimento: `npm run compose:up:dev`
+
+## ⚙ Executando testes
+
+Neste projeto foram feitos testes unitários e testes de integração, para executa-los, basta acessar a pasta `app/backend` e rodar o comando `npm test`
+> Mesmo tendo inicializado a aplicação via Docker, para executar os testes é necessário instalar as dependências (`npm run install:apps` na raiz)
+
+Os testes cobrem as rotas da API, os middlewares, as camadas de controller, service e models
