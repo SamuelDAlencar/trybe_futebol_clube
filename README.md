@@ -6,6 +6,7 @@ Projeto back-end (front e toda a estilização feita pelo time da Trybe!) que co
 ### 🗒 Pré-requisitos
 
 Sem docker: `node v16 >`
+
 Com docker: `docker`
 
 ### 🛠 Instalação
