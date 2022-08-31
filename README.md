@@ -1,8 +1,22 @@
+# [🇧🇷 Português]
+
 # ⚽ Trybe Futebol Clube
 
-# [🇧🇷 Portuguese]
-
 Projeto back-end (front e toda a estilização feita pelo time da Trybe!) que consiste em um CRUD de times e partidas de futebol, permitindo o usuário logar na aplicação, conferir partidas, filtra-las por "Em andamento" ou "Concluídas" e conferir a lista das classificações dos times, filtrando-os por "Mandantes" e "Visitantes"!
+
+## 🧰 Construído com
+
+- [Typescript](https://www.typescriptlang.org/) - Superset Js
+- [Node](https://nodejs.org/en/) - Campo de execução
+- [Express.js](https://expressjs.com/) - Framework node
+- [Sequelize](https://sequelize.org/) - ORM
+- [JWT](https://jwt.io/) - Criação/validação de tokens
+- [Eslint](https://eslint.org/) - Padronização de código
+- [MySQL](https://www.mysql.com/) - Banco relacional
+- [Docker](https://www.docker.com/) - Serviço de containerização
+- [Mocha](https://mochajs.org/) - Framework de testes node
+- [Chai](https://www.chaijs.com/) - Lib de assertions node
+- [Sinon](https://sinonjs.org/) - Framework de mocks Js
 
 ## 🚴 Começando
 ### 🗒 Pré-requisitos
@@ -40,27 +54,31 @@ Os testes cobrem as rotas da API, os middlewares, as camadas de controller, serv
 
 > ⚠ Testes das camadas de service e model das partidas ainda em progresso ⚠
 
-## 🧰 Construído com
-
-* [Typescript](https://www.typescriptlang.org/) - Superset Js
-* [Node](https://nodejs.org/en/) - Campo de execução
-* [Express.js](https://expressjs.com/) - Framework node
-* [Sequelize](https://sequelize.org/) - ORM
-* [JWT](https://jwt.io/) - Criação/validação de tokens
-* [Eslint](https://eslint.org/) - Padronização de código
-* [MySQL](https://www.mysql.com/) - Banco relacional
-* [Docker](https://www.docker.com/) - Serviço de containerização
-* [Mocha](https://mochajs.org/) - Framework de testes node
-* [Chai](https://www.chaijs.com/) - Lib de assertions node
-* [Sinon](https://sinonjs.org/) - Framework de mocks Js
-
 ## 📄 Licença
 
 Requisitos, front-end e ideia base do projeto feita pela [Trybe](https://www.betrybe.com/)
 
+<hr />
+
 # [🇺🇸 English]
 
+# ⚽ Trybe Football Club
+
 Back-end project (front-end code and styling done by Trybe's team!) consisting of a CRUD of soccer teams and matches, allowing the user to log into the application, check out matches, filter them by "In Progress" or "Finished" and check out the list of team standings, filtering them by "Home" and "Away"!
+
+## 🧰 Built with
+
+* [Typescript](https://www.typescriptlang.org/) - Js Superset
+* [Node](https://nodejs.org/en/) - Execution field
+* [Express.js](https://expressjs.com/) - node framework
+* [Sequelize](https://sequelize.org/) - ORM
+* [JWT](https://jwt.io/) - Token creation/validation
+* [Eslint](https://eslint.org/) - Code Standardization
+* [MySQL](https://www.mysql.com/) - Relational Database
+* [Docker](https://www.docker.com/) - Containers Service
+* [Mocha](https://mochajs.org/) - Node testing framework
+* [Chai](https://www.chaijs.com/) - Lib for node assertions
+* [Sinon](https://sinonjs.org/) - Js mocks framework
 
 ## 🚴 Getting started
 ### 🗒 Prerequisites
@@ -97,20 +115,6 @@ In this project we did unit tests and integration tests, to run them, just acces
 The tests cover the API routes, the middleware, controller, service and model layers
 
 > ⚠ Tests of the service and model layers of the games still in progress ⚠
-
-## 🧰 Built with
-
-* [Typescript](https://www.typescriptlang.org/) - Js Superset
-* [Node](https://nodejs.org/en/) - Execution field
-* [Express.js](https://expressjs.com/) - node framework
-* [Sequelize](https://sequelize.org/) - ORM
-* [JWT](https://jwt.io/) - Token creation/validation
-* [Eslint](https://eslint.org/) - Code Standardization
-* [MySQL](https://www.mysql.com/) - Relational Database
-* [Docker](https://www.docker.com/) - Containers Service
-* [Mocha](https://mochajs.org/) - Node testing framework
-* [Chai](https://www.chaijs.com/) - Lib for node assertions
-* [Sinon](https://sinonjs.org/) - Js mocks framework
 
 ## 📄 License
 
